@@ -1,6 +1,6 @@
 # jQueryDeprecatedAutoFix
 
-The app updates obsolete jQuery code to recommended alternatives. Currently, it resolves the following errors:
+The app updates obsolete jQuery code usage to recommended alternatives. Currently, it resolves the following errors:
 
 - jQuery.isFunction() is deprecated
 - jQuery.isArray is deprecated; use Array.isArray
