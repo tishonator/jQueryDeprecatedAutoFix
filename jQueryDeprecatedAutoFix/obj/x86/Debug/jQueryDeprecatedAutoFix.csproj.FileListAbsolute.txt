@@ -1,0 +1,11 @@
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/bin/Debug/jQueryDeprecatedAutoFix.exe
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/bin/Debug/jQueryDeprecatedAutoFix.pdb
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.csprojAssemblyReference.cache
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.csproj.CoreCompileInputs.cache
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.exe
+/home/tishonator/Projects/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.pdb
+/home/tishonator/tishonator_github/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/bin/Debug/jQueryDeprecatedAutoFix.exe
+/home/tishonator/tishonator_github/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/bin/Debug/jQueryDeprecatedAutoFix.pdb
+/home/tishonator/tishonator_github/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.csproj.CoreCompileInputs.cache
+/home/tishonator/tishonator_github/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.exe
+/home/tishonator/tishonator_github/jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/obj/x86/Debug/jQueryDeprecatedAutoFix.pdb
