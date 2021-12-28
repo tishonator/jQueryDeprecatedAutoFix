@@ -2,10 +2,10 @@
 
 The app updates obsolete jQuery code to recommended alternatives. Currently, it resolves the following errors:
 
-jQuery.isFunction() is deprecated
-jQuery.isArray is deprecated; use Array.isArray
-jQuery.expr[\':\'] is deprecated; use jQuery.expr.pseudos
-jQuery.expr.filters is deprecated; use jQuery.expr.pseudos
+- jQuery.isFunction() is deprecated
+- jQuery.isArray is deprecated; use Array.isArray
+- jQuery.expr[\':\'] is deprecated; use jQuery.expr.pseudos
+- jQuery.expr.filters is deprecated; use jQuery.expr.pseudos
 
 
 # How to Use
@@ -17,11 +17,10 @@ In this example, I will use MonoDevelop. You can download and install it.
 2. Open jQueryDeprecatedAutoFix.sln with MonoDevelop (or Visual Studio)
 
 3. Edit file paths in file: 
+
 jQueryDeprecatedAutoFix/jQueryDeprecatedAutoFix/Program.cs
 
-// Change these values
-string inputFilePath = "/home/tishonator/tishonator_git/themes/tishcommerce/js/utilities.js";
-string outputFilePath = "/home/tishonator/Downloads/utilities.js";
+![image](https://user-images.githubusercontent.com/11191328/147613005-ff48e7e5-f976-4061-a9e6-d36740fd853b.png)
 
 inputFilePath should contain a valid path to a file you want to update.
 
@@ -29,5 +28,13 @@ outputFilePath should contain a valid path to a updated file location. I prefer 
 
 4. Compile the App and execute
 
+![image](https://user-images.githubusercontent.com/11191328/147613051-0fb7b691-744b-4ae0-af8e-45c059736800.png)
+
+
 5. You will see logs in console i.e.
+
+![image](https://user-images.githubusercontent.com/11191328/147612871-3f60fdbe-b131-4df6-b70c-1be7ab8b2691.png)
+
+![image](https://user-images.githubusercontent.com/11191328/147612892-f128dce8-7d90-415e-a63e-2cbcd475affd.png)
+
 
