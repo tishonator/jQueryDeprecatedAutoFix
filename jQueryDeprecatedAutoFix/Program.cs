@@ -49,7 +49,7 @@ namespace jQueryDeprecatedAutoFix
         }
 
         /*
-         * jQuery.expr[\':\'] is deprecated; use jQuery.expr.pseudos, i.e.
+         * jQuery.isArray is deprecated; use Array.isArray, i.e.
          *
          *  s.isArray(this.obj) -> Array.isArray(this.obj)
          */
