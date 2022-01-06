@@ -6,6 +6,7 @@ The app updates obsolete jQuery code usage to recommended alternatives. Currentl
 - jQuery.isArray is deprecated; use Array.isArray
 - jQuery.expr[\':\'] is deprecated; use jQuery.expr.pseudos
 - jQuery.expr.filters is deprecated; use jQuery.expr.pseudos
+- jQuery.fn.click() event shorthand is deprecated
 
 
 # How to Use

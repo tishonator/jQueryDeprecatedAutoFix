@@ -9,7 +9,7 @@ namespace jQueryDeprecatedAutoFix
         public static void Main(string[] args)
         {
             // Change these values
-            string inputFilePath = "/home/tishonator/tishonator_git/themes/tishcommerce/js/utilities.js";
+            string inputFilePath = "/home/tishonator/tishonator_git/themes/tlocksmith/js/utilities.js";
             string outputFilePath = "/home/tishonator/Downloads/utilities.js";
 
             string jsContent = File.ReadAllText(inputFilePath);
@@ -18,6 +18,7 @@ namespace jQueryDeprecatedAutoFix
             jsContent = AutoFixIsArray(jsContent);
             jsContent = AutoFixExpr(jsContent);
             jsContent = AutoFixExprFilters(jsContent);
+            jsContent = AutoFixFnClick(jsContent);
 
             File.WriteAllText(outputFilePath, jsContent);
         }
@@ -97,6 +98,18 @@ namespace jQueryDeprecatedAutoFix
         public static string AutoFixExprFilters(string input)
         {
             return input.Replace(".expr.filters", ".expr.pseudos");
+        }
+
+        /*
+         * jQuery.fn.click() event shorthand is deprecated
+         * 
+         * .click(function(e){ -> .on('click', function(e){
+         *         
+         */
+        public static string AutoFixFnClick(string input)
+        {
+            return input.Replace(".click(function(", ".on('click', function(")
+                        .Replace(".click( function(", ".on('click', function(");
         }
     }
 }
