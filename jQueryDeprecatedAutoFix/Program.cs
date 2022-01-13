@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace jQueryDeprecatedAutoFix
 {
@@ -9,7 +10,7 @@ namespace jQueryDeprecatedAutoFix
         public static void Main(string[] args)
         {
             // Change these values
-            string inputFilePath = "/home/tishonator/tishonator_git/themes/tlocksmith/js/utilities.js";
+            string inputFilePath = "/home/tishonator/tishonator_git/themes/tcrypto/js/utilities.js";
             string outputFilePath = "/home/tishonator/Downloads/utilities.js";
 
             string jsContent = File.ReadAllText(inputFilePath);
@@ -19,6 +20,10 @@ namespace jQueryDeprecatedAutoFix
             jsContent = AutoFixExpr(jsContent);
             jsContent = AutoFixExprFilters(jsContent);
             jsContent = AutoFixFnClick(jsContent);
+            jsContent = AutoFixDelegate(jsContent);
+            jsContent = AutoFixFnFocus(jsContent);
+            jsContent = AutoFixFnMouseup(jsContent);
+            jsContent = AutoFixFnBlur(jsContent);
 
             File.WriteAllText(outputFilePath, jsContent);
         }
@@ -30,7 +35,7 @@ namespace jQueryDeprecatedAutoFix
          */
         public static string AutoFixIsFunction(string input)
         {
-            Regex rx = new Regex(@"(\w+)\.isFunction\(([^\)]+)\)");
+            Regex rx = new Regex(@"([\w+|$])\.isFunction\(([^\)]+)\)");
 
             MatchCollection matches = rx.Matches(input);
 
@@ -87,7 +92,9 @@ namespace jQueryDeprecatedAutoFix
         public static string AutoFixExpr(string input)
         {
             return input.Replace(".expr[\":\"]", ".expr.pseudos")
-                        .Replace(".expr[\':\']", ".expr.pseudos");
+                        .Replace(".expr[\':\']", ".expr.pseudos")
+                        .Replace(".expr[ \":\" ]", ".expr.pseudos")
+                        .Replace(".expr[ \':\' ]", ".expr.pseudos");
         }
 
         /*
@@ -110,6 +117,113 @@ namespace jQueryDeprecatedAutoFix
         {
             return input.Replace(".click(function(", ".on('click', function(")
                         .Replace(".click( function(", ".on('click', function(");
+        }
+
+        /*
+         * jQuery.fn.delegate() is deprecated
+         * 
+         * .delegate( selector, eventName, handlerProxy ) -> .find(selector).on( eventName, handlerProxy )
+         */
+        public static string AutoFixDelegate(string input)
+        {
+            while (input.Contains(".delegate("))
+            {
+                int delegateIndex = input.IndexOf(@".delegate(");
+
+                int iterateIndex = delegateIndex + @".delegate(".Length;
+                StringBuilder selectorVariable = new StringBuilder();
+                bool isSingleQuoteStringBegin = false;
+                bool isDoubleQuoteStringBegin = false;
+                while (iterateIndex < input.Length)
+                {
+                    // handle case of .delegate('a, img', eventType,
+                    if (input[iterateIndex] == '\'' && !isDoubleQuoteStringBegin)
+                    {
+                        if (isSingleQuoteStringBegin)
+                        {
+                            selectorVariable.Append(input[iterateIndex]);
+                            break;
+                        }
+                        else
+                        {
+                            selectorVariable.Append(input[iterateIndex]);
+                            isSingleQuoteStringBegin = true;
+                        }
+                    }
+                    else if (input[iterateIndex] == '"' && !isSingleQuoteStringBegin)
+                    {
+                        if (isDoubleQuoteStringBegin)
+                        {
+                            selectorVariable.Append(input[iterateIndex]);
+                            break;
+                        }
+                        else
+                        {
+                            selectorVariable.Append(input[iterateIndex]);
+                            isDoubleQuoteStringBegin = true;
+                        }
+                    }
+                    else if (input[iterateIndex] == ',' && !isSingleQuoteStringBegin && !isDoubleQuoteStringBegin)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        selectorVariable.Append(input[iterateIndex]);
+                    }
+
+                    ++iterateIndex;
+                }
+
+                input = input.Replace(".delegate(" + selectorVariable.ToString() + ",",
+                ".find(" + selectorVariable.ToString() + ").on( ")
+                            .Replace(".delegate(" + selectorVariable.ToString() + " ,",
+                ".find(" + selectorVariable.ToString() + ").on( ");
+
+                Console.WriteLine("Replace " + ".delegate(" + selectorVariable.ToString()
+                        + ", with " + ".find(" + selectorVariable.ToString() + ").on( ");
+            }
+
+            return input;
+        }
+
+        /*
+         * jQuery.fn.focus() event shorthand is deprecated
+         * 
+         * .focus(function(e){ -> .on('focus', function(e){
+         *         
+         */
+        public static string AutoFixFnFocus(string input)
+        {
+            return input.Replace(".focus( )", ".focus()")
+                        .Replace(".focus(function(", ".on('focus', function(")
+                        .Replace(".focus( ", ".on('focus', ");
+        }
+
+        /*
+         * jQuery.fn.mouseup() event shorthand is deprecated
+         * 
+         * .mouseup(function(e){ -> .on('mouseup', function(e){
+         *         
+         */
+        public static string AutoFixFnMouseup(string input)
+        {
+            return input.Replace(".mouseup( )", ".mouseup()")
+                        .Replace(".mouseup(function(", ".on('mouseup', function(")
+                        .Replace(".mouseup( ", ".on('mouseup', ");
+        }
+
+        /*
+         *  jQuery.fn.blur() event shorthand is deprecated
+         * 
+         * .blur(function(e){ -> .on('blur', function(e){
+         *         
+         */
+        public static string AutoFixFnBlur(string input)
+        {
+            return input.Replace(".blur( )", ".blur()")
+                        .Replace(".blur(function(", ".on('blur', function(")
+                        .Replace(".blur( ", ".on('blur', ");
         }
     }
 }

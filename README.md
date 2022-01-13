@@ -7,6 +7,10 @@ The app updates obsolete jQuery code usage to recommended alternatives. Currentl
 - jQuery.expr[\':\'] is deprecated; use jQuery.expr.pseudos
 - jQuery.expr.filters is deprecated; use jQuery.expr.pseudos
 - jQuery.fn.click() event shorthand is deprecated
+- jQuery.fn.delegate() is deprecated
+- jQuery.fn.focus() event shorthand is deprecated
+- jQuery.fn.mouseup() event shorthand is deprecated
+- jQuery.fn.blur() event shorthand is deprecated
 
 
 # How to Use
