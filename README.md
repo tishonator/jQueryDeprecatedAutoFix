@@ -11,6 +11,10 @@ The app updates obsolete jQuery code usage to recommended alternatives. Currentl
 - jQuery.fn.focus() event shorthand is deprecated
 - jQuery.fn.mouseup() event shorthand is deprecated
 - jQuery.fn.blur() event shorthand is deprecated
+- jQuery.fn.bind() is deprecated
+- jQuery.fn.submit() event shorthand is deprecated
+- jQuery.fn.resize() event shorthand is deprecated
+- 
 
 
 # How to Use

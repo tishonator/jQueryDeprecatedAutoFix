@@ -10,7 +10,7 @@ namespace jQueryDeprecatedAutoFix
         public static void Main(string[] args)
         {
             // Change these values
-            string inputFilePath = "/home/tishonator/tishonator_git/themes/tcrypto/js/utilities.js";
+            string inputFilePath = "/home/tishonator/tishonator_git/themes/tishbusiness/js/utilities.js";
             string outputFilePath = "/home/tishonator/Downloads/utilities.js";
 
             string jsContent = File.ReadAllText(inputFilePath);
@@ -24,6 +24,9 @@ namespace jQueryDeprecatedAutoFix
             jsContent = AutoFixFnFocus(jsContent);
             jsContent = AutoFixFnMouseup(jsContent);
             jsContent = AutoFixFnBlur(jsContent);
+            jsContent = AutoFixBind(jsContent);
+            jsContent = AutoFnSubmit(jsContent);
+            jsContent = AutoFnResize(jsContent);
 
             File.WriteAllText(outputFilePath, jsContent);
         }
@@ -224,6 +227,41 @@ namespace jQueryDeprecatedAutoFix
             return input.Replace(".blur( )", ".blur()")
                         .Replace(".blur(function(", ".on('blur', function(")
                         .Replace(".blur( ", ".on('blur', ");
+        }
+
+        /*
+         *  jQuery.fn.bind() is deprecated
+         * 
+         * .bind( -> .on(
+         *         
+         */
+        public static string AutoFixBind(string input)
+        {
+            return input.Replace(".bind(", ".on(");
+        }
+
+        /*
+         *  jQuery.fn.submit() event shorthand is deprecated
+         * 
+         * .submit(function( -> .on('submit', function(
+         *         
+         */
+        public static string AutoFnSubmit(string input)
+        {
+            return input.Replace(".submit(function(", ".on('submit', function(")
+                        .Replace(".submit( function(", ".on('submit', function(");
+        }
+
+        /*
+         *  jQuery.fn.resize() event shorthand is deprecated
+         * 
+         * .resize(function( -> .on('resize', function(
+         *         
+         */
+        public static string AutoFnResize(string input)
+        {
+            return input.Replace(".resize(function(", ".on('resize', function(")
+                        .Replace(".resize( function(", ".on('resize', function(");
         }
     }
 }
