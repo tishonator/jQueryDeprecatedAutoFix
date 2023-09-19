@@ -10,7 +10,7 @@ namespace jQueryDeprecatedAutoFix
         public static void Main(string[] args)
         {
             // Change these values
-            string inputFilePath = "/home/tishonator/tishonator_git/themes/tishbusiness/js/utilities.js";
+            string inputFilePath = "/home/tishonator/tishonator_git/themes/tishconsult/js/utilities.js";
             string outputFilePath = "/home/tishonator/Downloads/utilities.js";
 
             string jsContent = File.ReadAllText(inputFilePath);
@@ -27,6 +27,7 @@ namespace jQueryDeprecatedAutoFix
             jsContent = AutoFixBind(jsContent);
             jsContent = AutoFnSubmit(jsContent);
             jsContent = AutoFnResize(jsContent);
+            jsContent = AutoFixType(jsContent);
 
             File.WriteAllText(outputFilePath, jsContent);
         }
@@ -262,6 +263,32 @@ namespace jQueryDeprecatedAutoFix
         {
             return input.Replace(".resize(function(", ".on('resize', function(")
                         .Replace(".resize( function(", ".on('resize', function(");
+        }
+
+        /*
+         * jQuery.type is deprecated, i.e.
+         *
+         *  s.type(this._request.abort) -> (typeof this._request.abort)
+         */
+        public static string AutoFixType(string input)
+        {
+            Regex rx = new Regex(@"([\w+|$])\.type\(([^\)]+)\)");
+
+            MatchCollection matches = rx.Matches(input);
+
+            foreach (Match match in matches)
+            {
+                GroupCollection groups = match.Groups;
+
+                string oldCode = match.Value;
+                string newCode = "(typeof " + groups[2] + ")";
+
+                input = input.Replace(oldCode, newCode);
+
+                Console.WriteLine(oldCode + " --> " + newCode);
+            }
+
+            return input;
         }
     }
 }
